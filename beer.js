@@ -11,27 +11,85 @@ class Bottles {
     return Array.from({length: (upper - lower + 1)}, (_, index) => index + lower)
       .reverse()
       .map(this.verse)
-      .join("\n");
+      .join('\n');
   }
 
   verse(number) {
-    switch (number) {
+    const bottleNumber = BottleNumber.for(number);
+    return capitalize(`${bottleNumber} of beer on the wall, `) +
+          `${bottleNumber} of beer.\n` +
+          `${bottleNumber.action()}, ` +
+          `${bottleNumber.successor()} of beer on the wall.\n`;
+  }
+}
+
+class BottleNumber {
+  static for(number) {
+    switch(number) {
       case 0:
-        return 'No more bottles of beer on the wall, no more bottles of beer.\n' +
-        'Go to the store and buy some more, 99 bottles of beer on the wall.\n'
+        return new BottleNumber0(number);
       case 1:
-        return '1 bottle of beer on the wall, 1 bottle of beer.\n' +
-        'Take it down and pass it around, no more bottles of beer on the wall.\n'
-      case 2:
-        return '2 bottles of beer on the wall, 2 bottles of beer.\n' +
-        'Take one down and pass it around, 1 bottle of beer on the wall.\n'
+        return new BottleNumber1(number);
       default:
-        return `${number} bottles of beer on the wall, ` +
-          `${number} bottles of beer.\n` +
-          `Take one down and pass it around, ` +
-          `${number - 1} bottles of beer on the wall.\n`;
+        return new BottleNumber(number);
     }
   }
+
+  constructor(number) {
+    this.number = number;
+  }
+
+  toString() {
+    return `${this.quantity()} ${this.container()}`;
+  }
+
+  container() {
+    return 'bottles';
+  }
+
+  quantity() {
+    return `${this.number}`;
+  }
+
+  action() {
+    return `Take ${this.pronoun()} down and pass it around`;
+  }
+
+  pronoun() {
+    return 'one';
+  }
+
+  successor() {
+    return BottleNumber.for(this.number - 1);
+  }
+}
+
+class BottleNumber0 extends BottleNumber {
+  quantity() {
+    return 'no more';
+  }
+
+  action() {
+    return 'Go to the store and buy some more';
+  }
+
+  successor() {
+    return BottleNumber.for(99);
+  }
+}
+
+class BottleNumber1 extends BottleNumber {
+  container() {
+    return 'bottle';
+  }
+
+  pronoun() {
+    return 'it';
+  }
+}
+
+function capitalize(str) {
+  return str[0].toUpperCase() + str.slice(1);
 }
 
 module.exports = Bottles;
