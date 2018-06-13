@@ -3,8 +3,24 @@
 
 ### Instructions
 
-0. Clone repo and run `yarn install`.
-1. Run the test suite with `yarn test --watch`
-2. Remove `.skip` from the first test that has it.
-3. Make the test pass.
-4. Repeat steps 2 and 3 until all of the tests are green.
+1. Clone this repository:
+
+```
+git clone git@github.com:torqueforge/shopify-2018-montreal.git
+```
+
+2. Install dependencies:
+
+```
+yarn install
+```
+
+3. Run the test suite:
+
+```
+yarn test --watch
+```
+
+4. Remove `.skip` from the first test that has it.
+5. Make the test pass.
+6. Repeat steps 4 and 5 until all of the tests are green.
