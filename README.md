@@ -24,3 +24,13 @@ yarn test --watch
 4. Remove `.skip` from the first test that has it.
 5. Make the test pass.
 6. Repeat steps 4 and 5 until all of the tests are green.
+
+
+Tips:
+
+```js
+function numberRange(upper, lower) {
+  return Array.from(Array(1 + upper - lower), (_, i) => i + lower).reverse();
+}
+// ✨ JavaScript ✨
+```
