@@ -6,7 +6,7 @@
 1. Clone this repository:
 
 ```
-git clone git@github.com:torqueforge/shopify-2018-montreal.git
+git clone git@github.com:asalisbury/99bottles_js.git
 ```
 
 2. Install dependencies:
